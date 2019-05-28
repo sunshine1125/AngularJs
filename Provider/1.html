@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+
+<body>
+<div ng-app="myApp"> 
+    <div ng-controller="MyController"> 
+        <button ng-click="sayHello()">Hello</button> 
+    </div> 
+</div> 
+
+
+<script src="http://apps.bdimg.com/libs/angular.js/1.2.15/angular.min.js"></script>
+<script>
+angular.module('myApp', []) 
+.factory('greeter', function() { 
+    return { 
+        greet: function(msg) {alert(msg);} 
+    } 
+}) 
+.controller('MyController', 
+    function($scope, greeter) { 
+        $scope.sayHello = function() { 
+            greeter.greet("Hello!"); 
+        }; 
+}); 
+</script>
+</body>
+</html>
+      

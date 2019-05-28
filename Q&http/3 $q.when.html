@@ -1,0 +1,44 @@
+<!doctype html>
+<html ng-app="MyApp">
+<head>
+  <title>Scopes Example</title>
+</head>
+<body ng-cloak>
+
+  <div ng-controller="ListCtrl" > 
+
+    <ul ng-repeat="item in list">
+        <li>{{ item.Title }}</li>
+    </ul>
+
+  </div> 
+
+
+  <script src="../angular.js"></script>
+  <script>
+  var MyApp = angular.module('MyApp',[]);
+
+  MyApp.controller('ListCtrl', ['$scope','$http', '$q', function($scope, $http ,$q){
+
+      $q.when("111")
+      .then(res => console.log(res));
+
+
+
+      $q.when(getData())
+      .then(res => console.log(res.data));
+
+
+      function getData() {
+        return $http.get('data.json')
+      }
+  }])
+
+// deferred.reject("Can't update user"); 
+// 等同于 
+// deferred.resolve($q.reject("Can't update user")); 
+
+
+  </script>
+</body>
+</html>

@@ -1,0 +1,77 @@
+<!doctype html>
+<html ng-app="MyApp">
+<head>
+  <title>$q Example</title>
+</head>
+<body ng-cloak>
+
+  <div ng-controller="ListCtrl" > 
+    <input type="text" placeholder="input your github name" ng-model="name">
+    <button ng-click="load()">load</button>
+   公开repo:{{list.public_repos}}
+
+
+  </div> 
+
+
+  <script src="../angular.js"></script>
+  <script>
+  var MyApp = angular.module('MyApp',[]);
+
+  MyApp.controller('ListCtrl', ['$scope','$http', '$q', function($scope, $http ,$q){
+    $scope.name = 'mafeifan';
+
+    function demo(){
+      let deferred = $q.defer(), that = this;
+      if (that.cache == undefined) {
+        $http.get('https://api.github.com/users/github')
+          .success(function(data, status, headers){
+            that.cache = data;
+            deferred.resolve(that.cache);
+          })
+      }else {
+        console.log('from cache');
+        deferred.resolve(that.cache);
+      }
+      return deferred.promise; 
+    }
+
+
+    // 利用闭包缓存结果
+    function demo2() {
+      let defer = $q.defer(), cache;
+      return function() {
+        if (cache == undefined) {
+          $http.get('https://api.github.com/users/github')
+              .then((res) => {
+                  cache = res.data;
+                  defer.resolve(cache);
+              })
+        }else {
+          console.log('from cache');
+          defer.resolve(cache);
+        }
+        return defer.promise;
+      }
+    }
+
+
+
+    // 点击加载
+    let startDemo = demo2();
+    $scope.load = function() {
+      startDemo().then(function(data){
+        $scope.list = data;
+      })
+    }
+
+  }])
+
+// deferred.reject("Can't update user"); 
+// 等同于 
+// deferred.resolve($q.reject("Can't update user")); 
+
+
+  </script>
+</body>
+</html>

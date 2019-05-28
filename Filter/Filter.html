@@ -1,0 +1,79 @@
+ |<html ng-app="MyModule">
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+		<script src="../angular.js"></script>
+		<script src="Filter.js"></script>
+	</head>
+	<body>
+
+		<h3>自带Filter</h3>
+
+		<h5>日期 date</h5>
+
+		<p>{{ 1304375948024 | date }}</p>
+
+		<p>{{ 1304375948024 | date:"MM/dd/yyyy @ h:mma" }}</p>
+
+		<p>{{ 1304375948024 | date:"yyyy-MM-dd hh:mm:ss" }}</p>
+
+		<p>{{ 1288323623006 | date:'shortDate'}}</p>
+
+		<h5>货币 currency</h5>
+
+	   	<p>{{ 123  | currency}}</p>
+
+	   	<p>{{ 123  | currency: '￥' }}</p>
+		  
+		<h5>字符串 uppercase, lowercase</h5>
+
+		<p>Hello {{ 'yourName' | uppercase}}!</p>
+
+		<p>{{ ['Ari','Lerner','Likes','To','Eat','Pizza'] | filter:'e' }} </p>
+
+		<h3>自定义 1. 首字母大写 2. 负数不显示</h3>
+
+		<p>{{ 'ginger loves dog bones' | lowercase | capitalize }}</p>
+
+		<p>{{ 15 | blankIfNegative }}</p>
+
+    	<p>{{ -15 | blankIfNegative }}</p>
+
+		<h3>orderBy</h3>
+
+    	<div ng-controller="SortByTableController">
+		  <pre>Sorting predicate = {{predicate}}; reverse = {{reverse}}</pre>
+		  <hr/>
+		  [ <a href="" ng-click="predicate=''">恢复初始</a> ]
+		  <table class="friend">
+		    <tr>
+		      <th><a href="" ng-click="predicate = 'name'; reverse=false">名称</a>
+		          (<a href="" ng-click="predicate = '-name'; reverse=false">^</a>)</th>
+		      <th><a href="" ng-click="predicate = 'phone'; reverse=!reverse">Phone Number</a></th>
+		      <th><a href="" ng-click="predicate = 'age'; reverse=!reverse">Age</a></th>
+		    </tr>
+		    <tr ng-repeat="friend in friends | orderBy:predicate:reverse">
+		      <td>{{friend.name}}</td>
+		      <td>{{friend.phone}}</td>
+		      <td>{{friend.age}}</td>
+		    </tr>
+		  </table>
+		</div>
+
+		<hr>
+		<h3>filter练习</h3>
+    	<div ng-controller="BabyController">
+		  <input type="text" placeholder="关键字" ng-model="baby_keyword"><br>
+		  <input type="text" placeholder="babyID" ng-model="baby_id">
+		  <select ng-model="baby_sex">
+		  	<option value="">--选择--</option>
+		  	<option value="男">男</option>
+		  	<option value="女">女</option>
+		  </select>
+		  <ul>
+		  <li ng-repeat="baby in babies | filter: {sex:'女'} | orderBy: baby.expire">{{ baby.name }} -- {{ baby.sex }}</li>
+		  	<!--<li ng-repeat="baby in babies | filter: baby_keyword | filter: baby_sex| filter: {id:baby_id}">{{ baby.name }} -- {{ baby.sex }}</li>-->
+		  </ul>
+		</div>
+
+	</body>
+</html>

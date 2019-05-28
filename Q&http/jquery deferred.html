@@ -1,0 +1,56 @@
+<!doctype html>
+<html>
+<head>
+  <title>jQuery Defer</title>
+</head>
+<body>
+
+  <button id="load">load</button>
+ 
+  <script src="jquery.js"></script>
+  <script>
+        $(function(){
+
+           $("#load").on('click', function(){
+
+                //  1. 旧式写法，对象里包含成功和失败回调方法
+                /*
+            　　$.ajax({
+            　　　　url: "data.json",
+            　　　　success: function(){
+            　　　　　　alert("哈哈，成功了！");
+            　　　　},
+            　　　　error:function(){
+            　　　　　　alert("出错啦！");
+            　　　　}
+            　　});
+                */
+               
+                // 2. 返回的是deferred对象，可以进行链式操作
+                /*
+               　　$.ajax("data.json")
+                　　.done(function(){ 
+                        alert("哈哈，成功了！"); 
+                    })
+
+                　　.fail(function(){ 
+                        alert("出错啦！"); 
+                    })
+
+                    // 允许多次回调
+                    .done(function(){ 
+                        alert("第二个回调函数！");
+                    });
+                */
+
+                // 3. 
+                    
+
+
+
+           })
+
+        })
+  </script>
+</body>
+</html>

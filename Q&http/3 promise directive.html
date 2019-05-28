@@ -1,0 +1,46 @@
+<!doctype html>
+<html ng-app="MyApp">
+<head>
+  <title>Scopes Example</title>
+</head>
+<body ng-cloak>
+
+
+
+
+  <script>
+      new Promise((resolve, reject) => {
+        console.log("start Promise");
+        resolve("11")
+      })
+      .then((res) => {
+        console.log(res)
+        return '22';
+      })
+      .then((res) => {
+        console.log(res);
+      })
+      .then((res) => {
+        console.log(res)
+      })
+
+
+      loadPromise().then((res) => {
+        console.log(res);
+      })
+
+      console.log("start");
+
+      function loadPromise() {
+        return new Promise((resolve, reject) => {
+          resolve("load promise");
+        })
+      }
+
+      setTimeout(() => {
+        console.log("timeout!");
+      })
+
+  </script>
+</body>
+</html>

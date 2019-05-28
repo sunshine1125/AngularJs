@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+table, th , td  {
+  border: 1px solid grey;
+  border-collapse: collapse;
+  padding: 5px;
+}
+table tr:nth-child(odd) {
+  background-color: #f1f1f1;
+}
+table tr:nth-child(even) {
+  background-color: #ffffff;
+}
+</style>
+</head>
+
+<body ng-app="MyModule">
+<div ng-controller="customersController"> 
+  <p>怎么限制数量?</p>
+  <table>
+    <tr ng-repeat="x in names | orderBy : 'Country'">
+      <td>{{ x.Name }}</td>
+      <td>{{ x.Country }}</td>
+    </tr>
+  </table>
+</div>
+
+<div ng-controller="LoadDataCtrl">
+  <ul>
+    <li ng-repeat="user in users">
+      {{user.name}}
+    </li>
+  </ul>
+</div>
+
+
+<script src="http://apps.bdimg.com/libs/angular.js/1.2.15/angular.min.js"></script>
+<script>
+var myModule = angular.module("MyModule",[]);
+myModule.controller('customersController', ['$scope','$http', function($scope,$http){
+  $http.get("res.php")
+  .success(function(response) {
+    $scope.names = response;
+  });
+}])
+
+
+myModule.controller('LoadDataCtrl', ['$scope','$http', function($scope,$http){
+    $http({
+        method:'GET',
+        url:'data.json'
+    }).success(function(data,status,headers,config){
+        $scope.users = data;
+    });
+
+}])
+
+</script>
+
+
+</body>
+</html>
+      

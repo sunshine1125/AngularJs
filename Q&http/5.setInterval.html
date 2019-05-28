@@ -1,0 +1,50 @@
+<!doctype html>
+<html ng-app="MyApp">
+<head>
+  <title>Scopes Example</title>
+</head>
+<body ng-cloak>
+
+  <div ng-controller="ListCtrl" > 
+    <input type="text" ng-model="name">
+    <ul ng-repeat="item in list">
+        <li>{{ item.Title }}</li>
+    </ul>
+  </div> 
+
+
+<script>
+G('a');
+setTimeout("c('c')", 100 )
+G('b');
+
+
+setTimeout("c('d')", 1000 )
+
+let promise = new Promise(function(resolve, reject) {
+  G('d');
+  resolve();
+});
+
+promise.then(function() {
+  G('Resolved.');
+});
+
+G('e');
+
+function c(str){
+  G(str);
+}
+
+function G(str) {
+  console.log(str);
+}
+
+
+new Promise((resolve, reject) =>{
+  
+})
+
+</script>
+</body>
+</html>

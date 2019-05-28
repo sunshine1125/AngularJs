@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+
+<body ng-app='TestFormModule'>
+
+
+<form name="myForm" ng-submit="save()" ng-controller="TestFormModule">
+      <input name="userName" type="text" ng-model="user.userName" required/>
+      <input name="password" type="password" ng-model="user.password" required/>
+      <input type="submit" ng-disabled="myForm.$invalid"/>
+</form>
+<script src= "http://libs.useso.com/js/jquery/1.10.2/jquery.js"></script>
+<script src="http://apps.bdimg.com/libs/angular.js/1.2.15/angular.min.js"></script>
+
+<script>
+var appModule = angular.module('TestFormModule', []);
+appModule.controller("TestFormModule",function($scope,$http){
+    $scope.user={
+        userName:'damoqiongqiu',
+        password:''
+    };
+    $scope.save=function(){
+        // alert("保存数据!");
+        var url = '/finley/JS/Angular/processData.php'
+        $http.post(url,  
+          $.param($scope.user), {
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+        }).success(function (data) {
+            $scope.responseCode = data.code;
+
+            //1s后让错误消息隐藏
+            $timeout(function () {
+                $scope.responseCode = 0;
+            }, 1000);
+        });
+    }
+});
+</script>
+
+
+
+</body>
+</html>
+      

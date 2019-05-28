@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>ng-form</title>
+  </head>
+  <body>
+  
+    
+  <div ng-controller="TestCtrl">
+    
+     <form name="editForm">
+       <input type="text" name="username" required 
+             ng-trim="true" 
+             ng-model="userNum" 
+             ng-pattern="/^[0-9]*[1-9][0-9]*$/" 
+             ng-maxlength="6"
+             ng-required="true"
+             />
+       
+       <input type="submit">
+    </form>
+    
+    <div ng-if="editForm.username.$error.pattern">
+      格式不对.        
+    </div>
+    <pre>{{ editForm | json }}</pre>
+  </div> 
+  <p>客户端验证是为了更好的用户体验，但可以绕过</p>
+  <p>出于安全考虑，服务端验证是必要的</p>
+  <p>https://docs.angularjs.org/guide/forms</p>
+
+  </body>
+</html>
+<script src="../angular.js"></script>
+
+<script>
+
+angular.module('myApp', []) 
+.controller('TestCtrl', function($scope){
+    console.log($scope)
+  
+})
+</script>
+
+
+
+
+</body>
+</html>
+      

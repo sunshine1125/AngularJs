@@ -1,0 +1,21 @@
+<!doctype html>
+<html ng-app="myApp">
+<head>
+<script src="http://libs.useso.com/js/angular.js/1.2.16/angular.js"></script>
+</head>
+<body>
+ <div ng-controller="DemoController as demo">
+    Client ID: {{demo.clientId}} 
+
+ </div>
+ <script>
+ var myApp = angular.module('myApp',[]);
+ myApp.value('clientId', 'a12345654321x');
+ myApp.value('name', 'finley')
+ myApp.controller('DemoController', ['clientId','name', function(clientId,name){
+      this.clientId = clientId;
+      this.name = name;
+ }])
+ </script>
+</body>
+</html>
